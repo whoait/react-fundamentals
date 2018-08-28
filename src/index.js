@@ -3,17 +3,58 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import registerServiceWorker from './registerServiceWorker';
-import PropTypes from 'prop-types';
+import {shuffle, sample } from 'underscore';
 
-function Sum(props){
-  return <h1> 
-    {props.a} + {props.b} = {props.a + props.b }
-  </h1>
+const authors=[
+  {
+    name: 'Hoavv',
+    imageUrl: './girl.jpg',
+    imageSource: 'hoavv',
+    books: ['This is a girl',
+            'This is a car',
+            'This is a cat']
+  },
+  {
+    name: 'Hoavv1',
+    imageUrl: './girl.jpg',
+    imageSource: 'hoavv',
+    books: ['This is a girl',
+            'This is a car',
+            'This is a cat']
+  },
+  {
+    name: 'Hoavv2',
+    imageUrl: './girl.jpg',
+    imageSource: 'hoavv',
+    books: ['This is a girl',
+            'This is a car',
+            'This is a cat']
+  }
+];
+
+function getTurnData(authors){
+  const allBooks = authors.reduce(function(p, c, i){
+    return p.concat(c.books);
+  }, []);
+
+  const fourRandomBooks = shuffle(allBooks).slice(0,4);
+  const answer = fourRandomBooks[0];
+  
+
+  return {
+    books: fourRandomBooks,
+    authors: authors.find((author) => 
+        author.books.some((title) => 
+        title === answer))
+  }
 }
 
-Sum.propTypes = {
-  a: PropTypes.number.isRequired,
-  b: PropTypes.number.isRequired
-}
-ReactDOM.render(<Sum a = {'key'} b = {'xx'} />, document.getElementById('root'));
+const state = {
+  turnData: {
+    author: authors[0],
+    books: authors[0].books
+  }
+};
+
+ReactDOM.render(<AuthorQuiz  {...state} />, document.getElementById('root'));
 registerServiceWorker();
