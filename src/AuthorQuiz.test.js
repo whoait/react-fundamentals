@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import AuthorQuiz from './AuthorQuiz';
 import Enzyme, {shallow} from  'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
+Enzyme.configure({ adapter: new Adapter() });
 
 function Hello(props) {
   return <h1> Hello at {props.now} </h1>
