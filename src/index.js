@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
+import AddAuthorForm from './AddAuthorForm';
 import registerServiceWorker from './registerServiceWorker';
 import {shuffle, sample } from 'underscore';
+
 
 const authors=[
   {
@@ -64,12 +66,6 @@ function onAnswerSelected(answer){
   render();
 }
 
-function AddAuthorForm({match}){
-  return <div>
-      <h1> Add author</h1> 
-      <p>{JSON.stringify(match)} </p>
-    </div>
-}
 
 function App(){
   return ReactDOM.render(<AuthorQuiz  {...state} onAnswerSelected = {onAnswerSelected}/>, document.getElementById('root'));
